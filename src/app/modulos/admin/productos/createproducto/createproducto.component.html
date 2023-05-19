@@ -1,2 +1,28 @@
 <app-productoheader></app-productoheader>
-<p>createproducto works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <form (ngSubmit)="onCreate()" #f="ngForm" novalidate>
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" class="form-control" name="name" id="name"
+                 [(ngModel)]="nombre" required autocomplete="off">
+          <label for="description">Precio:</label>
+          <input type="text" class="form-control" name="description" id="description"
+                 [(ngModel)]="precio" required autocomplete="off">
+          <label for="aplicadesc">Aplica descuento:</label>
+          <input type="text" class="form-control" name="name" id="aplicadesc"
+                 [(ngModel)]="aplicadescuento" required autocomplete="off">
+          <label for="valordesc">Valor descuento:</label>
+          <input type="text" class="form-control" name="name" id="valordesc"
+                 [(ngModel)]="aplicadescuento" required autocomplete="off">
+
+        </div>
+        <button type="submit" class="btn btn-outline-success btn-block" [disabled]="!f.valid">
+          <i class="fas fa-plus-circle"></i> Create</button>
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="back()">
+          <i class="far fa-arrow-alt-circle-left"></i> Back</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -8,9 +8,9 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import { CreateproductoComponent } from './productos/createproducto/createproducto.component';
 import { DetailproductoComponent } from './productos/detailproducto/detailproducto.component';
 import { ListproductoComponent } from './productos/listproducto/listproducto.component';
-import { UpdateproductoComponent } from './productos/updateproducto/updateproducto.component';
 import { InfoproductoComponent } from './productos/infoproducto/infoproducto.component';
 import { ProductoheaderComponent } from './productos/productoheader/productoheader.component';
+import {UpdateproductoComponent} from "./productos/updateproducto/updateproducto.component";
 
 
 @NgModule({
