@@ -1,0 +1,76 @@
+<app-productoheader></app-productoheader>
+
+<div class="container">
+  <div class="card">
+    <p-table #dt [value]="productos" [scrollable]="true" scrollHeight="600px" styleClass="p-datatable-striped" [rowHover]="true"
+             dataKey="id"  styleClass="p-datatable-sm" [virtualScroll]="true" [virtualScrollItemSize]="40" [loading]="loading">
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="m-0">Lista de productos</h5>
+
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="bold" id="nombre" >nombre</th>
+          <th class="bold" id="precio" >precio</th>
+          <th class="bold" id="tipo" >tipo</th>
+          <th class="bold" id="material" >material</th>
+
+          <th style="min-width:100px"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dato>
+        <tr>
+          <td style="min-width:100px">{{dato.nombre}}</td>
+          <td style="min-width:200px">{{dato.precio}}</td>
+          <td style="min-width:100px">{{dato.tipo.nombre}}</td>
+          <td style="min-width:100px">{{dato.material.nombre}}</td>
+
+          <td ><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#productoModalDetail" (click)="view(dato)">
+            <i class="far fa-eye"></i>
+            Ver
+          </button><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#productoModalEdit" (click)="view(dato)">
+            <i class="far fa-edit"></i>
+            Editar
+          </button>
+            <button class="btn btn-outline-danger" (click)="onDelete(dato.codigo)"><i class="far fa-trash-alt"></i> Remover</button></td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="productoModalDetail" tabindex="-1" aria-labelledby="productoModalDetailLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="domainModaldetLabel">Detalle producto </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <app-detailproducto [productoSelected]="productoSelected"></app-detailproducto>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="productoModalEdit" tabindex="-1" aria-labelledby="productoModalEditLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="domainModalEdtLabel"> Editar producto </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <app-updateproducto [productoSelected]="productoSelected" ></app-updateproducto>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>

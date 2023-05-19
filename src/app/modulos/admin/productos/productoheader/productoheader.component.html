@@ -1,0 +1,17 @@
+<p-menubar [model]="items" >
+
+  <ng-template pTemplate="start">
+    <img src="/assets/images/logo.png" height="40" class="p-mr-2" alt="brand logo">
+    <label>
+      SGPC
+    </label>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <label>
+      Bem-vindo {{username}}
+    </label>
+    <button class="btn btn-outline-warning" (click)="back()" style="margin-left:.25em"><i class="fas fa-sign-out-alt"></i>
+      De volta</button>
+
+  </ng-template>
+</p-menubar>
