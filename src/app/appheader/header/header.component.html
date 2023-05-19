@@ -1,0 +1,17 @@
+<p-menubar>
+
+  <ng-template pTemplate="start">
+    <img src="/assets/images/logo.png" height="40" class="p-mr-2" alt="brand logo">
+    <label>
+      JOYAS GOLD
+    </label>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <label>
+      Bienvenido {{username}}
+    </label>
+    <button class="btn btn-outline-warning" (click)="logout()" style="margin-left:.25em"><i class="fas fa-sign-out-alt"></i>
+      Salir</button>
+
+  </ng-template>
+</p-menubar>
