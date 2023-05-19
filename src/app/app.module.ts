@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {CardModule} from "primeng/card";
 import {AppheaderModule} from "./appheader/appheader.module";
+import {AdminModule} from "./modulos/admin/admin.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AppheaderModule} from "./appheader/appheader.module";
       preventDuplicates: true,
     }),
     CardModule,
-    AppheaderModule
+    AppheaderModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
