@@ -4,8 +4,11 @@ import {ProductoService} from "../producto.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../../../services/login.service";
 import {ToastrService} from "ngx-toastr";
-import {Tipoproducto} from "../tipoproducto";
+import {TipoProducto} from "../tipoproducto";
 import {Material} from "../material";
+import {MaterialesService} from "../../servicios/materiales.service";
+import {TiposProductoService} from "../../servicios/tiposproducto.service";
+import * as Console from "console";
 
 @Component({
   selector: 'app-createproducto',
@@ -15,27 +18,37 @@ import {Material} from "../material";
 export class CreateproductoComponent implements OnInit {
 
   producto ?: Producto;
-  nombre : string = '';
-  precio : string = '';
-  aplicadescuento : string = '';
-  valordescuento : Date = new Date();
+  elnombre : string = '';
+  precio = 0 ;
+  aplicadescuento = 0;
+  valordescuento = 0;
+  materialesList :any ;
+  tipoProductoList:any;
+  materialSelect= 0
+  tipoProductoSelect= 0
 
   constructor(    private productoService: ProductoService,
                   private activatedRoute: ActivatedRoute,
                   private router: Router,
                   private loginService: LoginService,
-                  private toastr: ToastrService) { }
+                  private toastr: ToastrService,
+                  private materialService: MaterialesService,
+                  private tipoProductoService:TiposProductoService
+) { }
 
   ngOnInit(): void {
-    this.nombre = '';
+    this.getMateriales();
+    this.getTipoProductos();
   }
   onCreate(): void {
     //codigo: number, nombre: string, tipo: Tipoproducto, material: Material, precio: number, valordescuento: number, aplicadescuento: boolean
-    var tipo = new Tipoproducto(0, '');
-    var material = new Material(0,'');
-    var aplica = true;
+    var tipo = new TipoProducto(this.tipoProductoSelect, '');
+    var material = new Material(this.materialSelect,'');
 
-    this.producto = new Producto(0, this.nombre, tipo,material, 1000, 0.8, aplica);
+
+    this.producto = new Producto(0, this.elnombre, tipo,material, this.precio,
+      this.aplicadescuento == 1 ? this.valordescuento:0 ,
+      this.aplicadescuento == 1 ? true:false);
     this.productoService.create(this.producto).subscribe(
       data => {
         //console.log(data);
@@ -60,6 +73,28 @@ export class CreateproductoComponent implements OnInit {
     this.toastr.success(`El producto fue creado`, "Información");
   }
 
+  getMateriales(): void{
+    this.materialService.getList().subscribe(
+      data => {
+        this.materialesList = data;
+      },
+      err => {
+        //console.log(err)
+        //this.showError(err.code);
+      }
+    )
+  }
+  getTipoProductos(): void{
+    this.tipoProductoService.getList().subscribe(
+      data => {
+        this.tipoProductoList = data;
+      },
+      err => {
+        //console.log(err)
+        //this.showError(err.code);
 
+      }
+    )
+  }
 
 }

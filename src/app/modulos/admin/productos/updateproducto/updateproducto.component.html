@@ -5,13 +5,27 @@
         <div class="form-group">
           <label for="nombre">Nombre:</label>
           <input type="text" class="form-control" name="nombre" id="nombre"
-                 [(ngModel)]="productoSelected.nombre" required autocomplete="off">
-          <label for="tipo">tipo:</label>
-          <input type="text" class="form-control" name="tipo" id="tipo"
-                 [(ngModel)]="productoSelected.tipo.nombre" required autocomplete="off">
+                 [(ngModel)]="productoSelected.nombre" required autocomplete="off" readonly>
+          <label for="precio">Precio:</label>
+          <input type="text" class="form-control" name="precio" id="precio"
+                 [(ngModel)]="productoSelected.precio" required autocomplete="off" placeholder="Digite el precio">
+
+          <label for="tipoproducto" class="label">Tipo Producto :</label>
+          <select  name="tipoproducto" id="tipoproducto" class="form-control" [(ngModel)]="productoSelected.tipo.codigo">
+            <option *ngFor="let dato of tipoProductoList" [ngValue]="dato.codigo">{{dato.nombre}}</option>
+          </select>
           <label for="material">Material:</label>
           <input type="text" class="form-control" name="material" id="material"
-                 [(ngModel)]="productoSelected.material.nombre" required autocomplete="off">
+                 [(ngModel)]="productoSelected.material.nombre" required autocomplete="off" readonly>
+          <label for="aplicadesc">Aplica descuento:</label>
+          <input type="text" class="form-control" name="aplicadesc" id="aplicadesc"
+                 value="{{productoSelected.aplicaDescuento== true?'SI':'NO'}}"
+                 [(ngModel)]="productoSelected.aplicaDescuento" required autocomplete="off" readonly>
+
+          <label for="valordesc">Valor descuento:</label>
+          <input type="text" class="form-control" name="name" id="valordesc"
+                 [(ngModel)]="productoSelected.descuento" required autocomplete="off" readonly>
+
         </div>
         <button type="submit" class="btn btn-outline-success btn-block" [disabled]="!f.valid">
           <i class="far fa-edit"></i> Actualizar</button>

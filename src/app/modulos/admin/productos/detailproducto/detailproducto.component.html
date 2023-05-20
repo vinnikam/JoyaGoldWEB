@@ -24,12 +24,13 @@
       <hr>
       <dl>
         <dt class="bold" >Aplica descuento: </dt>
-        <dd class="align-content-lg-center justificado">{{productoSelected.aplicadescuento }}</dd>
+        <dd class="align-content-lg-center justificado">{{productoSelected.aplicaDescuento== true?'SI':'NO'}}</dd>
       </dl>
       <hr>
       <dl>
         <dt class="bold" >Valor descuento: </dt>
-        <dd class="align-content-lg-center justificado">{{productoSelected.valordescuento}}</dd>
+
+        <dd class="align-content-lg-center justificado">{{productoSelected.descuento}}</dd>
       </dl>
       <hr>
     </div>

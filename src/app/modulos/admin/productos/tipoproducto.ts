@@ -1,4 +1,4 @@
-export class Tipoproducto {
+export class TipoProducto {
   codigo: number;
   nombre: string;
 

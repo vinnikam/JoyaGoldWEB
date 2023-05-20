@@ -3,7 +3,7 @@ import {ProductoService} from "../producto.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Producto} from "../producto";
-import {Tipoproducto} from "../tipoproducto";
+import {TipoProducto} from "../tipoproducto";
 import {Material} from "../material";
 
 @Component({
@@ -18,7 +18,7 @@ export class ListproductoComponent implements OnInit {
   // @ts-ignore
   productoSelected: Producto
   indexSelected: number = 0
-
+  idBorrar = -1;
   loading: boolean = true;
 
   constructor(private productoService: ProductoService, private toastr: ToastrService, private router: Router) {
@@ -26,12 +26,12 @@ export class ListproductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.getproductos();
+    this.getProductos();
     this.productoSelected = new Producto(0,"",
       new Material(0,''),
-      new Tipoproducto(0,''),0,0.8,true)
+      new TipoProducto(0,''),0,0.8,true)
   }
-  getproductos(): void{
+  getProductos(): void{
     this.loading = true;
     this.productoService.list().subscribe(
       data => {
@@ -60,10 +60,16 @@ export class ListproductoComponent implements OnInit {
     //this.routerPath.navigate([`/admin/detaildomain/${id}`])
     this.router.navigate([`admin/detailproducto/${id}`])
   }
-  onDelete(id: number): void {
-    this.productoService.delete(id).subscribe(
+  onDeletePrev(id: number){
+    this.idBorrar = id;
+  }
+
+  onDelete(): void {
+    if (this.idBorrar <=0)
+      return ;
+    this.productoService.delete(this.idBorrar).subscribe(
       data => {
-        this.getproductos();
+        this.getProductos();
         this.showSuccess();
       },
       err => {
@@ -84,5 +90,20 @@ export class ListproductoComponent implements OnInit {
   showSuccess() {
     this.toastr.success(`El producto se borró exitosamente.`, "Acción de borrado");
   }
+  getMateriales(): void{
+    this.loading = true;
+    this.productoService.list().subscribe(
+      data => {
+        this.productos = data;
+        this.onSelect(this.productos[0], 0)
+        this.loading = false;
+      },
+      err => {
+        //console.log(err)
+        //this.showError(err.code);
+        this.loading = false;
 
+      }
+    )
+  }
 }

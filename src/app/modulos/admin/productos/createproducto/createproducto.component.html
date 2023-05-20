@@ -4,24 +4,39 @@
     <div class="col-md-4 mx-auto">
       <form (ngSubmit)="onCreate()" #f="ngForm" novalidate>
         <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input type="text" class="form-control" name="name" id="name"
-                 [(ngModel)]="nombre" required autocomplete="off">
-          <label for="description">Precio:</label>
-          <input type="text" class="form-control" name="description" id="description"
-                 [(ngModel)]="precio" required autocomplete="off">
+          <label for="nombre">Nombre:</label>
+          <input type="text" class="form-control" name="nombre" id="nombre"
+                 [(ngModel)]="elnombre" required autocomplete="off" placeholder="Digite el nombre">
+          <label for="precio">Precio:</label>
+          <input type="text" class="form-control" name="precio" id="precio"
+                 [(ngModel)]="precio" required autocomplete="off" placeholder="Digite el precio">
+
+          <label for="material" class="label">Material :</label>
+          <select  name="material" id="material" class="form-control" [(ngModel)]="materialSelect">
+            <option *ngFor="let dato of materialesList" [ngValue]="dato.codigo">{{dato.nombre}}</option>
+
+          </select>
+          <label for="tipoproducto" class="label">Tipo Producto :</label>
+          <select  name="tipoproducto" id="tipoproducto" class="form-control" [(ngModel)]="tipoProductoSelect">
+            <option *ngFor="let dato of tipoProductoList" [ngValue]="dato.codigo">{{dato.nombre}}</option>
+
+          </select>
           <label for="aplicadesc">Aplica descuento:</label>
-          <input type="text" class="form-control" name="name" id="aplicadesc"
-                 [(ngModel)]="aplicadescuento" required autocomplete="off">
+          <select  name="tipoproducto" id="aplicadesc" class="form-control" [(ngModel)]="aplicadescuento">
+            <option [ngValue]="1">Si</option>
+            <option [ngValue]="0">No</option>
+          </select>
+
           <label for="valordesc">Valor descuento:</label>
           <input type="text" class="form-control" name="name" id="valordesc"
-                 [(ngModel)]="aplicadescuento" required autocomplete="off">
+                 [(ngModel)]="valordescuento" required autocomplete="off" placeholder="Digite el % del descuento">
 
+          <br/>
         </div>
         <button type="submit" class="btn btn-outline-success btn-block" [disabled]="!f.valid">
-          <i class="fas fa-plus-circle"></i> Create</button>
+          <i class="fas fa-plus-circle"></i> Crear</button>
         <button type="button" class="btn btn-outline-primary btn-block" (click)="back()">
-          <i class="far fa-arrow-alt-circle-left"></i> Back</button>
+          <i class="far fa-arrow-alt-circle-left"></i> Volver</button>
       </form>
     </div>
   </div>

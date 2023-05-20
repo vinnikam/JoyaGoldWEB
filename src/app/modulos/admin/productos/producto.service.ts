@@ -17,22 +17,22 @@ export class ProductoService {
   constructor(private httpClient: HttpClient) { }
 
   public list(): Observable<Producto[]> {
-    return this.httpClient.get<Producto[]>(this.urlRest+'list', this.httpOptions);
+    return this.httpClient.get<Producto[]>(this.urlRest+'', this.httpOptions);
   }
   public detail(id: number): Observable<Producto> {
-    return this.httpClient.get<Producto>(this.urlRest +'getById/'+ `${id}`, this.httpOptions);
+    return this.httpClient.get<Producto>(this.urlRest +'/'+ `${id}`, this.httpOptions);
   }
 
   public create(entidad: Producto): Observable<any> {
-    return this.httpClient.post<any>(this.urlRest+"create" , entidad, this.httpOptions);
+    return this.httpClient.post<any>(this.urlRest+"" , entidad, this.httpOptions);
   }
 
   public update(entidad ?: Producto): Observable<any> {
-    return this.httpClient.put<any>(this.urlRest+"update" , entidad, this.httpOptions);
+    return this.httpClient.put<any>(this.urlRest+"" , entidad, this.httpOptions);
   }
 
   public delete(id: number): Observable<any> {
-    return this.httpClient.delete<any>(this.urlRest+"delete/" + `${id}`, this.httpOptions);
+    return this.httpClient.delete<any>(this.urlRest+ `${id}`, this.httpOptions);
   }
 
 }
